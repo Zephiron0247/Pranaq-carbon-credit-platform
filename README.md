@@ -1,6 +1,6 @@
 # Pranaq — Carbon Credit MRV Platform
 
-AI + Satellite + Blockchain infrastructure for carbon credit verification, anti-fraud governance, and automated MRV workflows.
+ML + Satellite + Blockchain infrastructure for carbon credit verification, anti-fraud governance, and automated MRV workflows.
 
 ---
 
