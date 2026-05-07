@@ -1,27 +1,63 @@
-# Pranaq - Carbon Credit MRV Platform 
+# Pranaq — Carbon Credit MRV Platform
 
-Satellite-ML-Blockchain MRV platform for carbon credit verification.
+AI + Satellite + Blockchain infrastructure for carbon credit verification, anti-fraud governance, and automated MRV workflows.
 
-## Stack
-- FastAPI + PostgreSQL 18
-- Google Earth Engine (Sentinel-2)
-- Solidity smart contract on Sepolia
-- Web3.py
+---
 
-## Setup
-1. Clone repo
-2. Create `.env` file with:
-   - DATABASE_URL=postgresql://postgres:PASSWORD@localhost:5433/carbon_credit_db
-   - SEPOLIA_RPC_URL=your_rpc_url
-   - BLOCKCHAIN_PRIVATE_KEY=your_private_key
-3. pip install -r requirements.txt
-4. uvicorn main:app --reload
+# Overview
 
-## Contract
-Deployed on Sepolia: 0x8d0B4Dbd29ae0a52C1B3d2B4568DFE6aF1032285
+Pranaq is a full-stack MRV (Measurement, Reporting, Verification) platform designed for transparent and scalable carbon credit verification.
 
-## Stages
-- Stage 1: ndvi_pipeline.py — Sentinel-2 NDVI/EVI/NDWI pipeline
-- Stage 2: ml_scoring.py — ML confidence scoring
-- Stage 3: FastAPI backend — 8 endpoints
-- Stage 4: Smart contract — ERC-20 carbon credit tokens
+The platform combines:
+- Sentinel-2 satellite imagery
+- NDVI/EVI/NDWI vegetation analysis
+- ML-based confidence scoring
+- Blockchain-based carbon credit issuance
+- Governance and fraud-review workflows
+
+---
+
+# Core Features
+
+## Remote Sensing
+- Sentinel-2 imagery analysis
+- NDVI vegetation monitoring
+- EVI canopy scoring
+- NDWI irrigation analysis
+- Dry-season consistency checks
+- Multi-year ecological monitoring
+
+## Machine Learning
+- Confidence scoring engine
+- Tree cover gain analysis
+- Spatial consistency scoring
+- Fraud-risk detection
+
+## Blockchain
+- ERC-20 carbon credit tokenization
+- Verification-linked minting
+- Duplicate mint prevention
+- Sepolia smart contract deployment
+
+## Governance Layer
+- Admin review workflows
+- Borderline project flagging
+- Fraud escalation system
+- Audit trail generation
+
+---
+
+# System Architecture
+
+```text
+Company Dashboard
+        ↓
+FastAPI Backend
+        ↓
+Satellite + ML Verification
+        ↓
+Governance Review Layer
+        ↓
+Smart Contract Minting
+        ↓
+Carbon Credit Issuance
