@@ -61,13 +61,12 @@ Governance Review Layer
 Smart Contract Minting
         ↓
 Carbon Credit Issuance
-
 # Repositories
 
+```
 | Repository | Purpose |
 |---|---|
 | [Backend](https://github.com/Zephiron0247/carbon-credit-backend) | FastAPI + ML + Remote Sensing |
 | [Smart Contracts](https://github.com/Zephiron0247/carbon-credit-contracts) | Solidity + Hardhat |
 | [Admin Dashboard](https://github.com/Zephiron0247/carbon-admin-dashboard) | Government/admin portal |
 | [Company Dashboard](https://github.com/Zephiron0247/carbon-company-dashboard) | Company submission portal |
-| [Buyer Dashboard](https://github.com/Zephiron0247/carbon-buyer-dashboard) | Buyer marketplace portal |
