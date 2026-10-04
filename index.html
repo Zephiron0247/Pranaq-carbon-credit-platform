@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pranaq — Satellite-verified carbon credits</title>
+<meta name="description" content="Pranaq checks tree-planting claims against Sentinel-2 satellite imagery, scores them with machine learning, and records approved credits on the Ethereum Sepolia testnet.">
+<meta name="theme-color" content="#143524">
+<meta property="og:title" content="Pranaq — Satellite-verified carbon credits">
+<meta property="og:description" content="Carbon credits you can verify from orbit. Live demo on the Sepolia test network.">
+<meta property="og:type" content="website">
+<!-- Placeholder mark -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23143524'/%3E%3Cpath d='M11 6v21' stroke='%23e8eee9' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='17' cy='14' r='7' fill='none' stroke='%23e8eee9' stroke-width='2.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #143524;
+    --moss: #2d5a3d;
+    --mist: #e8eee9;
+    --paper: #fbfcfa;
+    --ink: #0f1a14;
+    --muted: #4b5b52;
+    --sand: #d9cfa8;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--sans); color: var(--ink); background: var(--paper); line-height: 1.6; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--sand); outline-offset: 3px; }
+
+  /* Hero */
+  .hero { background: var(--forest); color: var(--mist); position: relative; overflow: hidden; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; position: relative; z-index: 2; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--serif); font-size: 1.5rem; font-weight: 600; letter-spacing: .01em; }
+  .gh { display: inline-flex; padding: 8px; border-radius: 50%; color: var(--mist); }
+  .gh:hover { background: rgba(232,238,233,.12); }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 32px; align-items: center; padding: 56px 0 88px; position: relative; z-index: 2; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 5.6vw, 4.4rem); line-height: 1.04; margin: 0 0 22px; letter-spacing: -.015em; }
+  .lede { font-size: 1.125rem; max-width: 34em; color: #c9d6cd; margin: 0 0 22px; }
+  .note { display: inline-block; font-size: .95rem; border-left: 3px solid var(--sand); padding: 2px 0 2px 12px; color: var(--mist); }
+  .topo { width: 100%; height: auto; display: block; }
+  .topo ellipse { fill: none; stroke: #6f9a7e; stroke-width: 1.4; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.4s ease-out forwards; }
+  .topo ellipse:nth-child(2) { animation-delay: .15s; } .topo ellipse:nth-child(3) { animation-delay: .3s; }
+  .topo ellipse:nth-child(4) { animation-delay: .45s; } .topo ellipse:nth-child(5) { animation-delay: .6s; }
+  .topo ellipse:nth-child(6) { animation-delay: .75s; } .topo ellipse:nth-child(7) { animation-delay: .9s; }
+  .topo ellipse:nth-child(8) { animation-delay: 1.05s; }
+  .topo .peak { stroke: var(--sand); stroke-width: 2; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* Sections */
+  section { padding: 72px 0; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.7rem, 3vw, 2.3rem); margin: 0 0 8px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 40px; max-width: 38em; }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; counter-reset: s; border-top: 2px solid var(--forest); }
+  .steps li { counter-increment: s; padding: 20px 20px 0 0; }
+  .steps li::before { content: counter(s); display: block; font-family: var(--serif); font-size: 2rem; color: var(--moss); line-height: 1; margin-bottom: 10px; }
+  .steps b { display: block; font-weight: 500; margin-bottom: 4px; }
+  .steps span { color: var(--muted); font-size: .96rem; }
+
+  .roles { background: var(--mist); }
+  .role-list { border-top: 1px solid #b9c6bd; }
+  .role { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 24px; align-items: center; padding: 28px 8px; border-bottom: 1px solid #b9c6bd; text-decoration: none; transition: background .15s; }
+  .role:hover { background: #dce6df; }
+  .role h3 { font-family: var(--serif); font-size: 1.5rem; margin: 0; font-weight: 600; }
+  .role p { margin: 0; color: var(--muted); }
+  .go { background: var(--forest); color: var(--mist); padding: 10px 18px; border-radius: 4px; font-weight: 500; white-space: nowrap; }
+  .role:hover .go { background: var(--moss); }
+
+  footer { background: var(--forest); color: #b9c9be; padding: 28px 0; text-align: center; font-size: .92rem; }
+  footer a { color: var(--mist); }
+
+  @media (max-width: 820px) {
+    .hero-grid { grid-template-columns: 1fr; padding: 32px 0 56px; }
+    .topo { max-width: 340px; margin: 0 auto; }
+    .steps { grid-template-columns: 1fr 1fr; row-gap: 24px; }
+    .role { grid-template-columns: 1fr; gap: 10px; }
+    .go { justify-self: start; }
+  }
+  @media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .topo ellipse { animation: none; stroke-dashoffset: 0; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/" aria-label="Pranaq home">
+        <img src="pranaq_logo.png" alt="" width="36" height="36">
+        Pranaq
+      </a>
+      <a class="gh" href="https://github.com/Zephiron0247" target="_blank" rel="noopener noreferrer" aria-label="Zephiron0247 on GitHub">
+        <svg width="26" height="26" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+    </header>
+
+    <main>
+      <div class="hero-grid">
+        <div>
+          <h1>Carbon credits you can verify from orbit.</h1>
+          <p class="lede">Pranaq checks tree-planting claims against Sentinel-2 satellite imagery, scores them with machine learning, and records approved credits on the Ethereum Sepolia testnet.</p>
+          <span class="note">Live demo on the Sepolia test network. No real funds are involved.</span>
+        </div>
+        <svg class="topo" viewBox="0 0 400 400" role="img" aria-label="Topographic contour lines">
+          <g transform="translate(200 200)">
+            <ellipse pathLength="1" rx="190" ry="150" transform="rotate(-18)"/>
+            <ellipse pathLength="1" rx="165" ry="126" transform="rotate(-14) translate(8 4)"/>
+            <ellipse pathLength="1" rx="140" ry="104" transform="rotate(-9) translate(14 6)"/>
+            <ellipse pathLength="1" rx="114" ry="82" transform="rotate(-4) translate(20 8)"/>
+            <ellipse pathLength="1" rx="88" ry="62" transform="rotate(2) translate(26 8)"/>
+            <ellipse pathLength="1" rx="62" ry="42" transform="rotate(8) translate(30 8)"/>
+            <ellipse pathLength="1" rx="36" ry="24" transform="rotate(14) translate(34 8)"/>
+            <ellipse class="peak" pathLength="1" rx="12" ry="8" transform="rotate(18) translate(36 8)"/>
+          </g>
+        </svg>
+      </div>
+    </main>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="sub">Each project moves through the same four stages, from land claim to credits.</p>
+    <ol class="steps">
+      <li><b>Submit a land claim</b><span>A developer registers the parcel and planting date.</span></li>
+      <li><b>Satellite analysis</b><span>NDVI, EVI and NDWI are measured from Sentinel-2 images.</span></li>
+      <li><b>ML confidence score</b><span>The result is scored and marked pass or fail.</span></li>
+      <li><b>Credits minted on-chain</b><span>Approved credits are minted, then retired by buyers.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="roles" id="roles">
+  <div class="wrap">
+    <h2>Choose a role</h2>
+    <p class="sub">Each role has its own dashboard. Pick the one you want to try.</p>
+    <div class="role-list">
+      <a class="role" href="https://carbon-admin-dashboard.onrender.com" target="_blank" rel="noopener noreferrer">
+        <h3>Regulator / Admin</h3>
+        <p>Review verification results, run satellite checks and mint approved credits.</p>
+        <span class="go">Open dashboard</span>
+      </a>
+      <a class="role" href="https://carbon-company-dashboard.onrender.com" target="_blank" rel="noopener noreferrer">
+        <h3>Project Developer</h3>
+        <p>Submit land claims and track verification and credit status.</p>
+        <span class="go">Open dashboard</span>
+      </a>
+      <a class="role" href="https://carbon-buyer-dashboard.onrender.com" target="_blank" rel="noopener noreferrer">
+        <h3>Credit Buyer</h3>
+        <p>Browse verified credits and retire them to offset emissions.</p>
+        <span class="go">Open dashboard</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    &copy; 2026
+    <a href="https://github.com/Zephiron0247"
+       target="_blank"
+       rel="noopener noreferrer">
+      Zephiron0247
+    </a>.
+    Released under the
+    <a href="https://github.com/Zephiron0247/Pranaq-carbon-credit-platform/blob/main/LICENSE"
+       target="_blank"
+       rel="noopener noreferrer">
+      MIT License
+    </a>.
+  </div>
+</footer>
+
+
+</body>
+</html>
